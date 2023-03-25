@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product</title>
+</head>
+<body>
+    <div class="section">
+        <h1 class="title">Edit a Product</h1>
+        <div class="container ">
+            <form action="/products/<%=product._id%>?_method=PUT" method="POST" class="is-centered">
+                <div class="columns">
+                    <div class="field column is-4">
+                        <label for="name" class="label">Name</label>
+                        <div class="control">
+                            <input id="name" name="name" class="input" type="text" placeholder="Product name" value="<%=product.name%>">
+                        </div>
+                    </div>
+                    
+                    <div class="field column is-4">
+                        <label for="price" class="label">Price</label>
+                        <div class="control">
+                            <input id="price" name="price" class="input" type="number" placeholder="Product price" min="1" value="<%=product.price%>" >
+                        </div>
+                    </div>
+
+                    <div class="field column is-2">
+                        <label class="label" for="category">Category</label>
+                        <div class="control">
+                            <div class="select">
+                                <select name="category" id="category">
+                                    <% for(let category of categories) {%>
+                                        <option value="<%=category%>" <%=product.category === category ? 'selected' : ''%>>
+                                            <%=category%>
+                                        </option>
+                                    <% } %>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="columns">    
+                    <div class="field is-grouped column">
+                        <div class="control">
+                            <button type="submit" class="button is-link">Submit</button>
+                        </div>
+                            <a href="/products"><button type="button" class="button is-link is-light">Cancel</button></a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
