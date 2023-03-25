@@ -16,12 +16,12 @@
               <p class="title">
                 <%= foundProduct.name %>
             </p>
-              <p class="subtitle">
-                <%= foundProduct.category %>
+              <p class="subtitle is-3 my-2">
+                <a href="/products?category=<%=foundProduct.category%>"><%= foundProduct.category %></a>
               </p>
             </div>
             <footer class="card-footer">
-              <p class="card-footer-item">
+              <p class="card-footer-item subtitle is-4">
                 $<%= foundProduct.price %>
               </p>
             </footer>

@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Products</title>
+    <title><%= category %> Products</title>
 </head>
 <body>
     <div class="section">
         <div class="columns is-flex is-justify-content-space-evenly">
-            <h1 class="title is-1">All Products</h1>
+            <h1 class="title is-1"><%= category %> Products</h1>
             <a href="/products/new"><button class="button is-info is-rounded is-medium ">Add New Product</button></a>
         </div>
         <div class="columns is-centered">
@@ -27,6 +27,11 @@
                     </li>
                 <% } %>
             </ul>
+        </div>
+        <div class="columns is-flex is-justify-content-space-evenly">
+            <% if(category !== 'All') {%>
+                <a href="/products"><button class="button is-outlined is-info is-rounded is-medium ">All Products</button></a>
+            <% } %>
         </div>
     </div>
 </body>
