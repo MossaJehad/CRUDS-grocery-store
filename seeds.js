@@ -1,27 +1,8 @@
 const mongoose = require('mongoose');
 
-const Product = require('./models/product')
+const Product = require('./models/product');
 
-mongoose.connect('mongodb://127.0.0.1:27017/farmStand')
-    .then(() => {
-        console.log('Connected to MongoDB');
-    })
-    .catch((err) => {
-        console.log('Could not connect to MongoDB' + err);
-    })
-
-// const p = new Product({
-//     name: 'Grapefruit',
-//     price: 10,
-//     category: 'fruit'
-// })
-
-// p.save().then(p => {
-//     console.log('Product saved:', p);
-// })
-// .catch(e => {
-//     console.log('Error saving product:', e);
-// })
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/farmStand';
 
 const seedProducts = [
     {
@@ -44,12 +25,20 @@ const seedProducts = [
         price: 2.69,
         category: 'dairy'
     }
-]
+];
 
-Product.insertMany(seedProducts)
-    .then(res => {
-        console.log(res)
-    })
-    .catch(err => {
-        console.log(err)
-    })
+async function seedDB() {
+    try {
+        await mongoose.connect(MONGODB_URI);
+        console.log('Connected to MongoDB');
+        const res = await Product.insertMany(seedProducts);
+        console.log('Seeded products:', res);
+    } catch (err) {
+        console.error('Error seeding database:', err);
+        process.exitCode = 1;
+    } finally {
+        await mongoose.connection.close();
+    }
+}
+
+seedDB();
